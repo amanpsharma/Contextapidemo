@@ -1,26 +1,36 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { Component } from 'react'
+import User from './Components/User';
+import { createContext } from 'istanbul-lib-report';
+export const Mycontext = React.createContext();
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+export default class App extends Component {
+  state={
+    name:"Aman Sharma",
+    age:23,
+    number:100,
+    your:"Sharma"
+  }
+
+  handlechange=()=>{
+    this.setState({
+      age:this.state.age + 1
+    })
+  }
+  handleminus=()=>{
+    this.setState({
+      number:this.state.number - 1
+    })
+  }
+  render() {
+    const contextdata ={
+      data:this.state,
+      handle:this.handlechange,
+      minus:this.handleminus
+    }
+    return (
+      <Mycontext.Provider value={contextdata}>
+        <User />
+      </Mycontext.Provider>
+    )
+  }
 }
-
-export default App;
